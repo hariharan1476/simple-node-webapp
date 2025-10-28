@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools {
+        nodejs "NodeJS-18"
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
@@ -15,8 +19,7 @@ pipeline {
 
         stage('Run App') {
             steps {
-                sh 'pm2 stop simple-node-webapp || true'
-                sh 'pm2 start index.js --name simple-node-webapp'
+                sh 'node index.js &'
             }
         }
     }
